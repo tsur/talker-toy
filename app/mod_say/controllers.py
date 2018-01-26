@@ -1,6 +1,6 @@
 # Import flask dependencies
 from flask import Blueprint, request, abort
-import say from say
+from say import say as sayProcess
 import json
 
 # Define the blueprint: 'auth', set its url prefix: app.url/auth
@@ -13,5 +13,5 @@ def say():
         abort(400)
     textToSay = request.json['text']
     lang = request.json['lang']
-    say(textToSay, language=lang)
+    sayProcess(textToSay, language=lang)
     return json.dumps({'status': 200})
