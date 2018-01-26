@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+  <link href="static/index.css" rel="stylesheet" />
+</head>
+
+<body>
+  <div class="say_container">
+    <div class="buttons">
+      <input class="text_content" type="text" placeholder="I'm fluffy, a talking toy" />
+      <a class="say">Say</a>
+    </div>
+  </div>
+  <div class="margin"></div>
+  <script type="text/javascript">
+
+    const talkBtn = document.querySelector('.say');
+    const talkInput = document.querySelector('.text_content');
+
+    const sendRequest = function (endpoint, data, onResponse) {
+
+      const xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = function () {
+        // readyState 4 means the request is done.
+        if (xhr.readyState === 4) {
+          onResponse(xhr.status, xhr.responseText);
+        }
+      };
+      xhr.open('POST', endpoint);
+      xhr.setRequestHeader("Content-type", "application/json");
+      xhr.send(JSON.stringify(data));
+    }
+
+    const getData = function () {
+      return { text: talkInput.value, lang: 'es' };
+    }
+
+    const say = function () {
+      if (!talkInput.value && talkInput.value == '') return false;
+      talkBtn.classList.toggle('disabled');
+      sendRequest('say', getData(), function (status) {
+        talkBtn.classList.toggle('disabled');
+      });
+    }
+
+    const emitActionFromButton = function (event) {
+      say();
+      return false;
+    }
+    const emitActionFromEnter = function (event) {
+      if (event.which == 13) {
+        say();
+      }
+      return false;
+    }
+
+    talkBtn.addEventListener('click', emitActionFromButton)
+    talkInput.addEventListener('keypress', emitActionFromEnter)
+
+  </script>
+</body>
+
+</html>

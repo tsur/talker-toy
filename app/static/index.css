@@ -1,0 +1,91 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+@import url(https://fonts.googleapis.com/css?family=Fira+Sans);
+@import url(https://fonts.googleapis.com/css?family=Montserrat);
+@import url(https://fonts.googleapis.com/css?family=Droid+Sans);
+
+@media screen and (max-width: 319px) {
+  .buttons a {
+    font-size: 20px;
+  }
+
+  .buttons .join {
+    position: relative;
+    top: 40px;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .buttons a {
+    font-size: 20px;
+  }
+}
+
+body, html {
+  margin: 0;
+  padding: 0;
+  background: #ECF0F1;
+  font-family: "Fira Sans";
+  text-align: center;
+}
+
+.header {
+
+  text-align:center;
+  width: 400px;
+  height: 300px;
+  margin-top: 50px;
+}
+
+.buttons {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.buttons button, .buttons a {
+  text-decoration: none;
+  color: white;
+  background: #F2385A;
+  margin: 30px;
+  padding: 10px;
+  font-size: 40px;
+  border-radius: 10px;
+  box-shadow: 0px 15px 0px 0px #f02046, 0px 0px 20px 0px #bbb;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.buttons button, .buttons a:active {
+  top: 108px;
+  box-shadow: 0px 7px 0px 0px #f02046;
+}
+
+.buttons button, .buttons a.disabled{
+  opacity: 0.5;
+  pointer-events:none;
+}
+
+.margin{
+  margin-bottom: 150px;
+}
+
+.say_container {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 70%;
+  height: 40%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.say_container input {
+  width: 380px;
+  height: 30px;
+  padding: 30px;
+  font-size: 30px;
+  outline: none;
+  border: 1px solid grey;
+}
