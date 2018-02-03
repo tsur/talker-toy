@@ -25,4 +25,4 @@ SECRET_KEY = "secret"
 HOST="0.0.0.0"
 
 # Server's port
-PORT=8080
+PORT=8081

@@ -13,12 +13,14 @@
       <input class="text_content" type="text" placeholder="I'm fluffy, a talking toy" />
       <a class="say">Say</a>
     </div>
+    <input class="lang_content" type="text" placeholder="Language" />
   </div>
   <div class="margin"></div>
   <script type="text/javascript">
 
     const talkBtn = document.querySelector('.say');
     const talkInput = document.querySelector('.text_content');
+    const langInput = document.querySelector('.lang_content');
 
     const sendRequest = function (endpoint, data, onResponse) {
 
@@ -35,7 +37,7 @@
     }
 
     const getData = function () {
-      return { text: talkInput.value, lang: 'es' };
+      return { text: talkInput.value, lang: langInput.value || 'Enrique' };
     }
 
     const say = function () {
