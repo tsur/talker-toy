@@ -1,22 +1,18 @@
-import subprocess
 import boto3
 import pygame
 import os
 import time
 import io
 
-class Say():
+class Polly():
     OUTPUT_FORMAT='mp3'
 
-    def __init__(self):
+    def __init__(self, voiceId=''):
         self.polly = boto3.client('polly') #access amazon web service
         self.VOICE_ID = voiceId
 
-    def espeak(something, language='en', voice='f1'):
-        subprocess.call(['espeak', '-v%s+%s' % (language, voice), something])
-
-    def aws(self, textToSpeech, voice='Enrique'): #get polly response and play directly
-        pollyResponse = self.polly.synthesize_speech(Text=textToSpeech, OutputFormat=self.OUTPUT_FORMAT, VoiceId=voice)
+    def say(self, textToSpeech, voice='Enrique'): #get polly response and play directly
+        pollyResponse = self.polly.synthesize_speech(Text=textToSpeech, OutputFormat=self.OUTPUT_FORMAT, VoiceId=voice if not self.VOICE_ID else self.VOICE_ID)
         
         pygame.mixer.init()
         pygame.init()  # this is needed for pygame.event.* and needs to be called after mixer.init() otherwise no sound is played 
@@ -42,3 +38,6 @@ class Say():
         with open(fileName, 'wb') as f:
             f.write(pollyResponse['AudioStream'].read())
             f.close()
+
+ttsEngine=Polly('Joanna')
+ttsEngine.say('Hello there, I am speaking english')

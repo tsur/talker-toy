@@ -1,41 +1,44 @@
-import talkey
-tts = talkey.Talkey(
-    # These languages are given better scoring by the language detector
-    # to minimise the chance of it detecting a short string completely incorrectly.
-    # Order is not important here
-    preferred_languages=['es', 'en'],
+import subprocess
+import boto3
+import pygame
+import os
+import time
+import io
 
-    # The factor by which preferred_languages gets their score increased, defaults to 80.0
-    preferred_factor=80.0,
+class TextToSpeach():
+    OUTPUT_FORMAT='mp3'
 
-    # The order of preference of using a TTS engine for a given language.
-    # Note, that networked engines (Google, Mary) is disabled by default, and so is dummy
-    # default: ['google', 'mary', 'espeak', 'festival', 'pico', 'flite', 'dummy']
-    # This sets eSpeak as the preferred engine, the other engines may still be used
-    #  if eSpeak doesn't support a requested language.
-    engine_preference=['espeak'],
+    def __init__(self):
+        self.polly = boto3.client('polly') #access amazon web service
+        self.VOICE_ID = voiceId
 
-    # Here you segment the configuration by engine
-    # Key is the engine SLUG, in this case ``espeak``
-    espeak={
-        # Specify the engine options:
-        'options': {
-            'enabled': True,
-        },
+    def espeak(something, language='en', voice='f1'):
+        subprocess.call(['espeak', '-v%s+%s' % (language, voice), something])
 
-        # Specify some default voice options
-        'defaults': {
-          'words_per_minute': 150,
-          'variant': 'f4',
-        },
+    def aws(self, textToSpeech, voice='Enrique'): #get polly response and play directly
+        pollyResponse = self.polly.synthesize_speech(Text=textToSpeech, OutputFormat=self.OUTPUT_FORMAT, VoiceId=voice)
+        
+        pygame.mixer.init()
+        pygame.init()  # this is needed for pygame.event.* and needs to be called after mixer.init() otherwise no sound is played 
+        
+        if os.name != 'nt':
+            pygame.display.set_mode((1, 1)) #doesn't work on windows, required on linux
+            
+        with io.BytesIO() as f: # use a memory stream
+            f.write(pollyResponse['AudioStream'].read()) #read audiostream from polly
+            f.seek(0)
+            pygame.mixer.music.load(f)
+            pygame.mixer.music.set_endevent(pygame.USEREVENT)
+            pygame.event.set_allowed(pygame.USEREVENT)
+            pygame.mixer.music.play()
+            pygame.event.wait() # play() is asynchronous. This wait forces the speaking to be finished before closing
+            
+        while pygame.mixer.music.get_busy() == True:
+            pass
 
-        # Here you specify language-specific voice options
-        # e.g. for english we prefer the mbrola en1 voice
-        'languages': {
-            'en': {
-                'voice': 'english-mb-en1',
-                'words_per_minute': 130
-            },
-        }
-    }
-)
+    def saveToFile(self, textToSpeech, fileName): #get polly response and save to file
+        pollyResponse = self.polly.synthesize_speech(Text=textToSpeech, OutputFormat=self.OUTPUT_FORMAT, VoiceId=self.VOICE_ID)
+        
+        with open(fileName, 'wb') as f:
+            f.write(pollyResponse['AudioStream'].read())
+            f.close()

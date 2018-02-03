@@ -1,11 +1,11 @@
 # Import flask dependencies
 from flask import Blueprint, request, abort
-from say import Say
+from tts import TextToSpeach
 import json
 
 # Define the blueprint: 'auth', set its url prefix: app.url/auth
 mod_say = Blueprint('say', __name__)
-ttsEngine = Say()
+ttsEngine = TextToSpeach()
 
 # Set the route and accepted methods
 @mod_say.route('/say', methods=['POST'])
