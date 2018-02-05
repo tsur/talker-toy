@@ -16,15 +16,13 @@ class Polly():
         
         pygame.mixer.init()
         pygame.init()  # this is needed for pygame.event.* and needs to be called after mixer.init() otherwise no sound is played 
-        
-        if os.name != 'nt':
-            pygame.display.set_mode((1, 1)) #doesn't work on windows, required on linux
             
         with io.BytesIO() as f: # use a memory stream
             f.write(pollyResponse['AudioStream'].read()) #read audiostream from polly
             f.seek(0)
             pygame.mixer.music.load(f)
             pygame.mixer.music.set_endevent(pygame.USEREVENT)
+            pygame.mixer.music.set_volume(1)
             pygame.event.set_allowed(pygame.USEREVENT)
             pygame.mixer.music.play()
             pygame.event.wait() # play() is asynchronous. This wait forces the speaking to be finished before closing
@@ -39,5 +37,5 @@ class Polly():
             f.write(pollyResponse['AudioStream'].read())
             f.close()
 
-ttsEngine=Polly('Joanna')
-ttsEngine.say('Hello there, I am speaking english')
+ttsEngine=Polly('Enrique')
+ttsEngine.say('Hola. Soy Flafy tu nuevo manager. Aún no puedo hacer muchas tareas, dado que solo tengo algunos commits de vida. Sin embargo, pronto seré capaz de realizar tareas mas complejas como avisaros de historias de usuarios que no avanzan, de pull ricues que no tienen revision en varios días o de facilitar vuestras reuniones creando automáticamente historias de usuarios o haciendo las estimaciones por vosotros. Por si fuera poco, también puedo contar chistes malos. ¿Sabes cómo se despiden los químicos? Ácido un placer. Ja ja ja. Y para terminar, también puedo decir groserías, improperios y exabruptos, entre otras declaraciones de amor. ¡hay hija!, ¡te comía to la cosa!')
