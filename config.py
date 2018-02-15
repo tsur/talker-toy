@@ -26,3 +26,6 @@ HOST="0.0.0.0"
 
 # Server's port
 PORT=8081
+
+# Jira server
+JIRA_SERVER="https://pebl.itrsgroup.com"

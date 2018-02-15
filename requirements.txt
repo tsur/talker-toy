@@ -6,4 +6,3 @@ pyttsx==1.1
 talkey==0.1.1
 boto3==1.5.22
 PyAudio==0.2.11
-jira==1.0.10
