@@ -3,6 +3,7 @@ JIRA Client
 """
 
 from config import JIRA_SERVER
+from collections import Counter
 import os
 import requests
 
@@ -37,5 +38,14 @@ class JiraClient:
     try:
       response = requests.get('{0}/rest/api/2/issue/STARK-{1}'.format(self.server, issue_id), headers = self.headers)
       return response.json()
+    except:
+      return None
+
+  def get_issues_number_in_sprint(self, sprint_id):
+    try:
+      sprint_issues = self.get_issues_in_sprint(sprint_id)
+      sprint_total = sprint_issues['total']
+      sprint_status_list = [issue['fields']['status']['statusCategory']['name'] for issue in sprint_issues['issues']]
+      return {'total': sprint_total, 'status': Counter(sprint_status_list)}
     except:
       return None
