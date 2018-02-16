@@ -13,7 +13,7 @@ def textResponse(text):
     if ":sprint" in text.lower():
         days_remaining = jiraClient.get_remaining_days("169")
         sprint_count = jiraClient.get_issues_number_in_sprint("169")
-        return "Gentecilla, ahora puedo acceder a yira. Os informo de que os quedan {0} dias para terminar el sprint. Tenemos un total de {1} tareas, de las cuales {2} estan aun por hacer, {3} estan en progreso o siendo revisadas y {4} estan terminadas. {5}".format(days_remaining, sprint_count['total'], sprint_count['status']['To Do'], sprint_count['status']['In Progress'], sprint_count['status']['Done'],"Acordaos que al final siempre vais de culo, que si no os ha dado tiempo de probarlo todo, que si hay que hacer la integracion, que si un merje la ha liado parda. Solo os aviso, tenedlo en cuenta.")
+        return "Hola equipo, ahora puedo acceder a yira. Os informo de que os quedan {0} dias para terminar el sprint. Tenemos un total de {1} tareas, de las cuales {2} estan aun por hacer, {3} estan en progreso o siendo revisadas y {4} estan terminadas. {5}".format(days_remaining, sprint_count['total'], sprint_count['status']['To Do'], sprint_count['status']['In Progress'], sprint_count['status']['Done'],"Acordaos que al final siempre vais de culo, que si no os ha dado tiempo de probarlo todo, que si hay que hacer la integracion, que si un merje la ha liado parda. Solo os aviso, tenedlo en cuenta.")
     return text
 
 # Set the route and accepted methods
