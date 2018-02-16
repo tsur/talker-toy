@@ -6,7 +6,8 @@ from config import JIRA_SERVER
 from collections import Counter
 import os
 import requests
-
+# Temporal Token
+# enIpbGxhbG9iYXNAaXRyc2dyb3VwLmNvbTozNzEyMjR5SVQ3Nys3Nn==
 class JiraClient:
   def __init__(self, server=None, token=None):
     self.server = server if server is not None else JIRA_SERVER
