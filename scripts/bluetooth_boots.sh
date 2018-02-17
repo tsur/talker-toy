@@ -2,7 +2,7 @@
 pulseaudio --start
 wait
 /home/pi/talker-toy/scripts/bluetooth_reconnect.py & > /dev/null 2>&1
-sudo python /home/pi/talker-toy/run.py
+python /home/pi/talker-toy/run.py &
 
 # Put this file in
 # /etc/init.d/talker-toy-bluetooth
