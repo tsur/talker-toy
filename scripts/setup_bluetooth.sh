@@ -1,0 +1,1 @@
+git clone https://github.com/bareinhard/a2dp_bluetooth.git && cd a2dp_bluetooth/a2dp_source && ./configure

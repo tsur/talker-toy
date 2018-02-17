@@ -13,11 +13,14 @@ sudo pip install -r requirements.txt
 sudo pip install awscli
 sudo aws configure
 
-# When using mini jack 3.5, run this
+##### IF WANT TO USE MINI JACK:
 # amixer cset numid=3 1 # force headphone (PWM) output
-# and make sure the line dtparam=audio=on in file /boot/config.txt is uncomment
 
-# To use bluetooth https://raspberrypi.stackexchange.com/questions/53408/automatically-connect-trusted-bluetooth-speaker
+##### IF WANT TO USE BLUETOOTH: (1)
+# follow guide at https://raspberrypi.stackexchange.com/questions/53408/automatically-connect-trusted-bluetooth-speaker
 # echo 'pulseaudio --start' >> ~/.bashrc
 # echo 'wait' >> ~/.bashrc
 # echo '/home/py/talker-toy/scripts/bluetooth_reconnect.py' >> ~/.bashrc
+
+##### IF WANT TO USE BLUETOOTH: (2)
+# ./talker-toy/scripts/setup_bluetooth.sh
