@@ -34,7 +34,7 @@ import time
 
 def blue_it():
     while True:
-        time.sleep(15)
+        time.sleep(10)
         subprocess.call('/home/pi/talker-toy/scripts/bluetooth_autopair.sh', shell=True)
 
 blue_it()

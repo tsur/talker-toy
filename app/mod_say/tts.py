@@ -10,9 +10,9 @@ class TextToSpeach():
 
     def __init__(self):
         self.polly = boto3.client('polly') #access amazon web service
-        pygame.mixer.init()
-        pygame.init()
-        pygame.mixer.music.set_volume(1)
+        # pygame.mixer.init()
+        # pygame.init()
+        # pygame.mixer.music.set_volume(1)
 
     def espeak(something, language='en', voice='f1'):
         subprocess.call(['espeak', '-v%s+%s' % (language, voice), something])
@@ -20,8 +20,9 @@ class TextToSpeach():
     def aws(self, textToSpeech, voice='Enrique'): #get polly response and play directly
         pollyResponse = self.polly.synthesize_speech(Text=textToSpeech, OutputFormat=self.OUTPUT_FORMAT, VoiceId=voice)
         
-        # pygame.mixer.init()
-        # pygame.init()  
+        pygame.mixer.init()
+        pygame.init()  
+        pygame.mixer.music.set_volume(1)
         # this is needed for pygame.event.* and needs to be called after mixer.init() otherwise no sound is played 
         
         # if os.name != 'nt':
