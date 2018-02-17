@@ -16,3 +16,8 @@ sudo aws configure
 
 ##### IF WANT TO USE BLUETOOTH: (1)
 # follow guide at http://youness.net/raspberry-pi/bluetooth-headset-raspberry-pi
+
+# if every fails and no bluez card is shown then go with this
+# sudo apt-get remove --purge bluez pulseaudio
+# sudo apt-get install bluez pulseaudio pulseaudio-module-bluetooth bluez-firmware bluetooth bluez-tools bluez-hcidump pi-bluetooth
+# pacmd set-default-sink bluez_sink.54_E2_56_8B_EB_1A.a2dp_sink
