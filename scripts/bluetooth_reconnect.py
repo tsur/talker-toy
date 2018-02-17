@@ -17,7 +17,7 @@ def blue_it():
         waiting()
 
 def waiting():
-    subprocess.call('killall -9 pulseaudio', shell=True)
+    subprocess.call('pulseaudio --kill', shell=True)
     time.sleep(3)
     subprocess.call('pulseaudio --start', shell=True)
     time.sleep(2)
