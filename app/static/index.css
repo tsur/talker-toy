@@ -4,7 +4,7 @@
 @import url(https://fonts.googleapis.com/css?family=Droid+Sans);
 
 @media screen and (max-width: 319px) {
-  .buttons a {
+  .say {
     font-size: 20px;
   }
 
@@ -15,7 +15,7 @@
 }
 
 @media screen and (max-width: 450px) {
-  .buttons a {
+  .say {
     font-size: 20px;
   }
 }
@@ -42,7 +42,7 @@ body, html {
   margin-right: auto;
 }
 
-.buttons button, .buttons a {
+.buttons button, .say {
   text-decoration: none;
   color: white;
   background: #F2385A;
@@ -55,18 +55,26 @@ body, html {
   cursor: pointer;
 }
 
-.buttons button, .buttons a:active {
+.say {
+  display: block;
+}
+
+.buttons button, .say:active {
   top: 108px;
   box-shadow: 0px 7px 0px 0px #f02046;
 }
 
-.buttons button, .buttons a.disabled{
+.buttons button, .say.disabled{
   opacity: 0.5;
   pointer-events:none;
 }
 
 .margin{
   margin-bottom: 150px;
+}
+
+.send {
+  display: block;
 }
 
 .say_container {
@@ -76,9 +84,6 @@ body, html {
   width: 70%;
   height: 40%;
   transform: translate(-50%, -50%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .say_container input {
@@ -88,4 +93,21 @@ body, html {
   font-size: 30px;
   outline: none;
   border: 1px solid grey;
+}
+
+
+@media screen and (max-width: 500px) {
+  .say_container input {
+    width: 180px;
+    padding: 20px;
+  }
+  
+}
+
+@media screen and (max-width: 250px) {
+  .say_container input {
+    width: 80px;
+    padding: 20px;
+  }
+  
 }
